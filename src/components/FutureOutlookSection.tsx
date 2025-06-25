@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Rocket, Globe, TrendingUp, Target } from 'lucide-react';
@@ -32,29 +32,10 @@ const outlookAreas = [
 ];
 
 export const FutureOutlookSection: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 relative bg-gradient-to-b from-slate-950 to-blue-950/20">
-      <div className="max-w-7xl mx-auto" ref={ref}>
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
           <Badge 
@@ -63,16 +44,12 @@ export const FutureOutlookSection: React.FC = () => {
           >
             Future Vision
           </Badge>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-8 transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Future Outlook
             </span>
           </h2>
-          <p className={`text-xl text-slate-400 max-w-3xl mx-auto transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`} style={{ animationDelay: '200ms' }}>
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
             Fadassols Group is focused on scaling operations, exploring new markets, and investing in emerging technologies to become a global leader across sectors
           </p>
         </div>
@@ -84,10 +61,7 @@ export const FutureOutlookSection: React.FC = () => {
             return (
               <Card 
                 key={index}
-                className={`bg-slate-800/30 backdrop-blur-sm border-slate-700/50 transition-all duration-700 hover:bg-slate-800/50 hover:border-slate-600/50 hover:scale-105 group relative overflow-hidden ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{ animationDelay: `${400 + index * 150}ms` }}
+                className="bg-slate-800/30 backdrop-blur-sm border-slate-700/50 transition-all duration-300 hover:bg-slate-800/50 hover:border-slate-600/50 hover:scale-105 group relative overflow-hidden"
               >
                 <div className={`absolute inset-0 bg-gradient-to-r ${area.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
                 
@@ -104,9 +78,7 @@ export const FutureOutlookSection: React.FC = () => {
         </div>
 
         {/* Commitment Statement */}
-        <Card className={`mt-16 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border-slate-700/50 transition-all duration-800 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`} style={{ animationDelay: '800ms' }}>
+        <Card className="mt-16 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border-slate-700/50">
           <CardContent className="p-8 text-center">
             <h3 className="text-2xl font-bold text-white mb-4">
               Our Commitment to Excellence

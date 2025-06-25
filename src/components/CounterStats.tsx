@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface StatItem {
   number: number;
@@ -15,26 +15,11 @@ const stats: StatItem[] = [
 
 export const CounterStats: React.FC = () => {
   const [counters, setCounters] = useState(stats.map(() => 0));
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true);
-          animateCounters();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [isVisible]);
+    // Start animation immediately on component mount
+    animateCounters();
+  }, []);
 
   const animateCounters = () => {
     stats.forEach((stat, index) => {
@@ -56,7 +41,7 @@ export const CounterStats: React.FC = () => {
   };
 
   return (
-    <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
       {stats.map((stat, index) => (
         <div key={index} className="text-center group">
           <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6 transition-all duration-300 group-hover:bg-slate-800/50 group-hover:border-slate-600/50 group-hover:scale-105">

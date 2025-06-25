@@ -22,25 +22,26 @@ const locations = [
 ];
 
 export const GlobalPresenceSection: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Always visible
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.01, rootMargin: '100px 0px' }
-    );
+  // Remove intersection observer - everything loads instantly
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     ([entry]) => {
+  //       if (entry.isIntersecting) {
+  //         setIsVisible(true);
+  //       }
+  //     },
+  //     { threshold: 0.01, rootMargin: '100px 0px' }
+  //   );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+  //   if (ref.current) {
+  //     observer.observe(ref.current);
+  //   }
 
-    return () => observer.disconnect();
-  }, []);
+  //   return () => observer.disconnect();
+  // }, []);
 
   return (
     <section id="global" className="py-20 px-4 sm:px-6 lg:px-8 relative">

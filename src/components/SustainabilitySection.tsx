@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
@@ -30,49 +30,33 @@ const sustainabilityPillars = [
 ];
 
 export const SustainabilitySection: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const [animatedProgress, setAnimatedProgress] = useState([0, 0, 0]);
-  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Animate progress bars
-          sustainabilityPillars.forEach((pillar, index) => {
-            setTimeout(() => {
-              let current = 0;
-              const increment = pillar.progress / 50;
-              const timer = setInterval(() => {
-                current += increment;
-                if (current >= pillar.progress) {
-                  current = pillar.progress;
-                  clearInterval(timer);
-                }
-                setAnimatedProgress(prev => {
-                  const newProgress = [...prev];
-                  newProgress[index] = current;
-                  return newProgress;
-                });
-              }, 20);
-            }, index * 300);
+    // Start progress bar animations immediately
+    sustainabilityPillars.forEach((pillar, index) => {
+      setTimeout(() => {
+        let current = 0;
+        const increment = pillar.progress / 50;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= pillar.progress) {
+            current = pillar.progress;
+            clearInterval(timer);
+          }
+          setAnimatedProgress(prev => {
+            const newProgress = [...prev];
+            newProgress[index] = current;
+            return newProgress;
           });
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
+        }, 20);
+      }, index * 300);
+    });
   }, []);
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 relative bg-gradient-to-b from-slate-950 to-green-950/20">
-      <div className="max-w-7xl mx-auto" ref={ref}>
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
           <Badge 
@@ -81,16 +65,12 @@ export const SustainabilitySection: React.FC = () => {
           >
             Sustainability
           </Badge>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-8 transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">
             <span className="bg-gradient-to-r from-green-400 via-green-300 to-green-200 bg-clip-text text-transparent">
               Committed to a Greener Future
             </span>
           </h2>
-          <p className={`text-xl text-slate-400 max-w-3xl mx-auto transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`} style={{ animationDelay: '200ms' }}>
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
             Leading sustainable practices across all our business sectors
           </p>
         </div>
@@ -102,10 +82,7 @@ export const SustainabilitySection: React.FC = () => {
             return (
               <Card 
                 key={index}
-                className={`bg-slate-800/30 backdrop-blur-sm border-slate-700/50 transition-all duration-700 hover:bg-slate-800/50 hover:border-green-500/30 hover:scale-105 group ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{ animationDelay: `${400 + index * 200}ms` }}
+                className="bg-slate-800/30 backdrop-blur-sm border-slate-700/50 transition-all duration-300 hover:bg-slate-800/50 hover:border-green-500/30 hover:scale-105 group"
               >
                 <CardContent className="p-8">
                   <div className="flex items-center space-x-4 mb-6">

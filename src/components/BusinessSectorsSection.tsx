@@ -48,36 +48,37 @@ const businessSectors = [
 ];
 
 export const BusinessSectorsSection: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [animatedStats, setAnimatedStats] = useState(businessSectors.map(() => false));
+  const [isVisible, setIsVisible] = useState(true); // Always visible
+  const [animatedStats, setAnimatedStats] = useState(businessSectors.map(() => true)); // All stats visible
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Faster stat animations
-          businessSectors.forEach((_, index) => {
-            setTimeout(() => {
-              setAnimatedStats(prev => {
-                const newStats = [...prev];
-                newStats[index] = true;
-                return newStats;
-              });
-            }, index * 50);
-          });
-        }
-      },
-      { threshold: 0.01, rootMargin: '150px 0px' }
-    );
+  // Remove intersection observer - everything loads instantly
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     ([entry]) => {
+  //       if (entry.isIntersecting) {
+  //         setIsVisible(true);
+  //         // Faster stat animations
+  //         businessSectors.forEach((_, index) => {
+  //           setTimeout(() => {
+  //             setAnimatedStats(prev => {
+  //               const newStats = [...prev];
+  //               newStats[index] = true;
+  //               return newStats;
+  //             });
+  //           }, index * 50);
+  //         });
+  //       }
+  //     },
+  //     { threshold: 0.01, rootMargin: '150px 0px' }
+  //   );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+  //   if (ref.current) {
+  //     observer.observe(ref.current);
+  //   }
 
-    return () => observer.disconnect();
-  }, []);
+  //   return () => observer.disconnect();
+  // }, []);
 
   return (
     <section id="sectors" className="py-20 px-4 sm:px-6 lg:px-8 relative">

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { User, Award, Globe, Briefcase, Heart } from 'lucide-react';
@@ -32,29 +32,10 @@ const leadershipTeam = [
 ];
 
 export const LeadershipSection: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
-      <div className="max-w-7xl mx-auto" ref={ref}>
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
           <Badge 
@@ -63,16 +44,12 @@ export const LeadershipSection: React.FC = () => {
           >
             Leadership
           </Badge>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-8 transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">
             <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-200 bg-clip-text text-transparent">
               Visionary Leadership
             </span>
           </h2>
-          <p className={`text-xl text-slate-400 max-w-3xl mx-auto transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`} style={{ animationDelay: '200ms' }}>
+          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
             Driving social change through economic empowerment, philanthropic initiatives, and innovative solutions across multiple industries
           </p>
         </div>
@@ -84,10 +61,7 @@ export const LeadershipSection: React.FC = () => {
             return (
               <Card 
                 key={index}
-                className={`bg-slate-800/30 backdrop-blur-sm border-slate-700/50 transition-all duration-700 hover:bg-slate-800/50 hover:border-amber-500/30 hover:scale-105 group ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{ animationDelay: `${400 + index * 150}ms` }}
+                className="bg-slate-800/30 backdrop-blur-sm border-slate-700/50 transition-all duration-300 hover:bg-slate-800/50 hover:border-amber-500/30 hover:scale-105 group"
               >
                 <CardContent className="p-6 text-center">
                   <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-slate-600 to-slate-700 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
