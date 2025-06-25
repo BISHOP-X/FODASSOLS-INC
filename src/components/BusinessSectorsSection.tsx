@@ -57,7 +57,7 @@ export const BusinessSectorsSection: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Stagger the stat animations
+          // Faster stat animations
           businessSectors.forEach((_, index) => {
             setTimeout(() => {
               setAnimatedStats(prev => {
@@ -65,11 +65,11 @@ export const BusinessSectorsSection: React.FC = () => {
                 newStats[index] = true;
                 return newStats;
               });
-            }, index * 200);
+            }, index * 50);
           });
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.01, rootMargin: '150px 0px' }
     );
 
     if (ref.current) {
