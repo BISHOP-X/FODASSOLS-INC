@@ -33,7 +33,7 @@ export const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpe
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-gold-400 bg-clip-text text-transparent">
+              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-amber-400 to-amber-300 bg-clip-text text-transparent">
                 Fadassols
               </div>
             </div>
