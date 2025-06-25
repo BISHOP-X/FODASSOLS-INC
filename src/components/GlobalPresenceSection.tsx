@@ -106,7 +106,7 @@ export const GlobalPresenceSection: React.FC = () => {
         </div>
 
         {/* Partnership Message */}
-        <Card className={`bg-gradient-to-r from-blue-500/10 to-amber-500/10 backdrop-blur-sm border-slate-700/50 transition-all duration-800 ${
+        <Card className={`bg-slate-800/30 backdrop-blur-sm border-slate-700/50 transition-all duration-800 hover:bg-slate-800/50 hover:border-slate-600/50 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`} style={{ animationDelay: '800ms' }}>
           <CardContent className="p-8 text-center">
