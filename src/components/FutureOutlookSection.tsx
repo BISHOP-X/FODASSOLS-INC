@@ -78,7 +78,7 @@ export const FutureOutlookSection: React.FC = () => {
         </div>
 
         {/* Commitment Statement */}
-        <Card className="mt-16 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border-slate-700/50">
+        <Card className="mt-16 bg-slate-800/40 backdrop-blur-sm border-slate-700/50">
           <CardContent className="p-8 text-center">
             <h3 className="text-2xl font-bold text-white mb-4">
               Our Commitment to Excellence
