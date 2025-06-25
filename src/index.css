@@ -6,6 +6,22 @@
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
 @layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background: linear-gradient(to bottom, #020617, #0f172a, #020617);
+    color: hsl(var(--foreground));
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  html {
+    background-color: #020617;
+    scroll-behavior: smooth;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -177,4 +193,57 @@ html {
 /* Progress bar styling */
 .progress-bar {
   background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+/* Mobile-specific optimizations to prevent white flash */
+@media (max-width: 768px) {
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+    position: relative;
+  }
+  
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+/* Prevent white flash during transitions */
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure consistent background during scroll */
+section {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+}
+
+/* Smooth scrolling with better performance */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Prevent layout shift */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }

@@ -20,15 +20,26 @@ import { ScrollProgress } from '@/components/ScrollProgress';
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
+    
+    // Set loaded state after component mounts
+    setIsLoaded(true);
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white overflow-x-hidden">
+      {/* Loading overlay for smoother initial render */}
+      {!isLoaded && (
+        <div className="fixed inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 z-50 flex items-center justify-center">
+          <div className="animate-pulse text-blue-400">Loading...</div>
+        </div>
+      )}
       {/* Scroll Progress Indicator */}
       <ScrollProgress />
 
