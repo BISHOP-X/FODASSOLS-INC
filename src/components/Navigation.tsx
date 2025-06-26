@@ -62,9 +62,12 @@ export const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpe
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-slate-300 hover:text-white"
+                className="text-slate-300 hover:text-white hover:bg-slate-800/50 active:bg-slate-700/50 focus:bg-slate-800/50 flex items-center space-x-2 px-3 py-2"
               >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                <span className="text-sm font-medium">
+                  {isMenuOpen ? 'Close' : 'Menu'}
+                </span>
               </Button>
             </div>
           </div>

@@ -1,14 +1,19 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CounterStats } from '@/components/CounterStats';
+import { PageExplorer } from '@/components/PageExplorer';
+import { useNavigate } from 'react-router-dom';
 
 interface HeroSectionProps {
   scrollY: number;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ scrollY }) => {
+  const [isPageExplorerOpen, setIsPageExplorerOpen] = useState(false);
+  const navigate = useNavigate();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24" id="home">
       {/* Parallax Background Elements */}
@@ -56,37 +61,43 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollY }) => {
           <Button 
             size="lg" 
             className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white border-none px-6 py-3 sm:px-8 sm:py-4 text-lg font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-blue-500/25 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900"
-            onClick={() => {
-              const element = document.querySelector('#sectors');
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-            aria-label="Navigate to business sectors section"
+            onClick={() => setIsPageExplorerOpen(true)}
+            aria-label="Open page navigation menu"
           >
-            Explore Our Sectors
+            Explore Pages
           </Button>
           <Button 
             size="lg" 
             variant="outline" 
             className="border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 px-6 py-3 sm:px-8 sm:py-4 text-lg font-medium transition-all duration-300 hover:scale-105 hover:bg-slate-800/50 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-900"
-            onClick={() => {
-              const element = document.querySelector('#contact');
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-            aria-label="Navigate to contact section"
+            onClick={() => navigate('/contact')}
+            aria-label="Navigate to contact page"
           >
             Contact Us
           </Button>
         </div>
 
         {/* Counter Stats */}
-        <div className="animate-fade-in" style={{ animationDelay: '1000ms' }}>
+        <div className="animate-fade-in mt-16" style={{ animationDelay: '1000ms' }}>
+          <div className="text-center mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent">
+                Our Global Impact
+              </span>
+            </h3>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+              Driving growth and innovation across multiple industries worldwide
+            </p>
+          </div>
           <CounterStats />
         </div>
       </div>
+
+      {/* Page Explorer Modal */}
+      <PageExplorer 
+        isOpen={isPageExplorerOpen} 
+        onClose={() => setIsPageExplorerOpen(false)} 
+      />
     </section>
   );
 };
