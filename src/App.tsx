@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Sectors from "./pages/Sectors";
+import { GlobalPresence } from "./pages/GlobalPresence";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/sectors" element={<Sectors />} />
+          <Route path="/global" element={<GlobalPresence />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/original" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

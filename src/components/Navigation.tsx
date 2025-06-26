@@ -16,6 +16,7 @@ export const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpe
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Sectors', href: '/sectors' },
+    { name: 'Global Presence', href: '/global' },
     { name: 'Contact', href: '/contact' },
   ];
 
