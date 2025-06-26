@@ -1,11 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle } from 'lucide-react';
 
 interface FormData {
   name: string;
@@ -20,7 +20,11 @@ interface FormErrors {
   message?: string;
 }
 
-export const ContactSection: React.FC = () => {
+interface ContactSectionProps {
+  showHeader?: boolean;
+}
+
+export const ContactSection: React.FC<ContactSectionProps> = ({ showHeader = true }) => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -30,6 +34,7 @@ export const ContactSection: React.FC = () => {
   
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -58,14 +63,42 @@ export const ContactSection: React.FC = () => {
     if (!validateForm()) return;
     
     setIsSubmitting(true);
+    setIsSuccess(false);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Simulate processing time for better UX
+    await new Promise(resolve => setTimeout(resolve, 1500));
     
-    console.log('Form submitted:', formData);
+    // Create email content
+    const emailBody = `
+Contact Form Submission from Fadassols Website
+
+Name: ${formData.name}
+Email: ${formData.email}
+Company: ${formData.company || 'Not provided'}
+
+Message:
+${formData.message}
+
+---
+Sent from: https://fodassols.com.ng
+Date: ${new Date().toLocaleString()}
+    `.trim();
     
-    // Reset form
-    setFormData({ name: '', email: '', company: '', message: '' });
+    // Create mailto link
+    const mailtoLink = `mailto:obinna_ude2@yahoo.com?subject=Contact Form Submission - ${formData.name}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Open email client
+    window.open(mailtoLink, '_blank');
+    
+    // Show success state
+    setIsSuccess(true);
+    
+    // Reset form after showing success
+    setTimeout(() => {
+      setFormData({ name: '', email: '', company: '', message: '' });
+      setIsSuccess(false);
+    }, 4000);
+    
     setIsSubmitting(false);
   };
 
@@ -83,17 +116,17 @@ export const ContactSection: React.FC = () => {
     {
       icon: MapPin,
       title: 'Headquarters',
-      details: ['Nigeria', 'Operations: Nigeria, United Kingdom']
+      details: ['No 1 Sowore Osundairo Street, Ikeja', 'Lagos State, Nigeria']
     },
     {
       icon: Mail,
       title: 'Email',
-      details: ['info@fadassols.com', 'partnerships@fadassols.com']
+      details: ['fadassolsconceptsltd@gmail.com', 'Business Inquiries & Partnerships']
     },
     {
       icon: Phone,
       title: 'Phone',
-      details: ['+234 XXX XXX XXXX', '+44 XXX XXX XXXX']
+      details: ['+234 902 125 2434', '+234 803 366 9961']
     }
   ];
 
@@ -106,23 +139,25 @@ export const ContactSection: React.FC = () => {
   return (
     <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge 
-            variant="outline" 
-            className="border-blue-500/30 text-blue-300 bg-blue-500/10 px-4 py-2 text-sm backdrop-blur-sm mb-6"
-          >
-            Get In Touch
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
-              Contact Us
-            </span>
-          </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
-            Ready to explore partnership opportunities? Let's discuss how we can work together.
-          </p>
-        </div>
+        {/* Section Header - Only show if showHeader is true */}
+        {showHeader && (
+          <div className="text-center mb-16">
+            <Badge 
+              variant="outline" 
+              className="border-blue-500/30 text-blue-300 bg-blue-500/10 px-4 py-2 text-sm backdrop-blur-sm mb-6"
+            >
+              Get In Touch
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-8">
+              <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
+                Contact Us
+              </span>
+            </h2>
+            <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+              Ready to explore partnership opportunities? Let's discuss how we can work together.
+            </p>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
@@ -178,11 +213,20 @@ export const ContactSection: React.FC = () => {
                 
                 <Button 
                   type="submit" 
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
+                  disabled={isSubmitting || isSuccess}
+                  className={`w-full transition-all duration-300 ${
+                    isSuccess 
+                      ? 'bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800' 
+                      : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'
+                  } text-white`}
                 >
                   {isSubmitting ? (
                     <>Sending...</>
+                  ) : isSuccess ? (
+                    <>
+                      <CheckCircle className="w-4 h-4 mr-2" />
+                      Message Sent!
+                    </>
                   ) : (
                     <>
                       <Send className="w-4 h-4 mr-2" />
@@ -190,6 +234,14 @@ export const ContactSection: React.FC = () => {
                     </>
                   )}
                 </Button>
+                
+                {isSuccess && (
+                  <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-center">
+                    <p className="text-green-400 text-sm">
+                      Your email client has opened with your message ready to send to our team!
+                    </p>
+                  </div>
+                )}
               </form>
             </CardContent>
           </Card>

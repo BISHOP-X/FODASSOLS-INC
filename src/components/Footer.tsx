@@ -3,17 +3,24 @@ import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 
+interface FooterLink {
+  name: string;
+  href: string;
+  external?: boolean;
+}
+
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
-  const footerSections = [
+  const footerSections: { title: string; links: FooterLink[] }[] = [
     {
       title: 'Business Sectors',
       links: [
         { name: 'Media & Entertainment', href: '#sectors' },
         { name: 'Technology Solutions', href: '#sectors' },
         { name: 'Real Estate', href: '#sectors' },
-        { name: 'Agribusiness', href: '#sectors' }
+        { name: 'Agribusiness', href: '#sectors' },
+        { name: 'Hospitality', href: '#sectors' }
       ]
     },
     {
@@ -28,9 +35,11 @@ export const Footer: React.FC = () => {
     {
       title: 'Subsidiaries',
       links: [
-        { name: 'ShakaraSquare.ng', href: '#' },
-        { name: 'SearchlightNews.ng', href: '#' },
-        { name: 'AEI Technik Process Ltd', href: '#' }
+        { name: 'ShakaraSquare.ng', href: 'https://shakarasquare.ng/', external: true },
+        { name: 'SearchlightNews.ng', href: 'https://searchlightnews.ng/', external: true },
+        { name: 'AEI Technik Process Ltd', href: 'https://www.facebook.com/share/18i6gKUShq/?mibextid=wwXIfr', external: true },
+        { name: 'Old Berrys Restaurant and Bar', href: 'https://www.instagram.com/oldberrysbar?igsh=YXZmM3VjdTlwYWxy&utm_source=qr', external: true },
+        { name: 'Coastal View Shortlets', href: '#sectors', external: false }
       ]
     }
   ];
@@ -65,6 +74,8 @@ export const Footer: React.FC = () => {
                   <li key={linkIndex}>
                     <a 
                       href={link.href}
+                      target={link.external ? '_blank' : undefined}
+                      rel={link.external ? 'noopener noreferrer' : undefined}
                       className="text-slate-400 hover:text-white text-sm transition-colors duration-200"
                     >
                       {link.name}

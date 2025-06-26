@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 interface NavigationProps {
   isMenuOpen: boolean;
@@ -9,19 +10,16 @@ interface NavigationProps {
 }
 
 export const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpen }) => {
+  const location = useLocation();
+  
   const menuItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Sectors', href: '#sectors' },
-    { name: 'Global Presence', href: '#global' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Sectors', href: '/sectors' },
+    { name: 'Contact', href: '/contact' },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleMenuClick = () => {
     setIsMenuOpen(false);
   };
 
@@ -33,22 +31,26 @@ export const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpe
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-amber-400 to-amber-300 bg-clip-text text-transparent">
+              <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-amber-400 to-amber-300 bg-clip-text text-transparent">
                 Fadassols
-              </div>
+              </Link>
             </div>
 
             {/* Desktop Menu */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
                 {menuItems.map((item) => (
-                  <button
+                  <Link
                     key={item.name}
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-200 hover:bg-slate-800/50 rounded-md"
+                    to={item.href}
+                    className={`px-3 py-2 text-sm font-medium transition-colors duration-200 hover:bg-slate-800/50 rounded-md ${
+                      location.pathname === item.href 
+                        ? 'text-blue-400 bg-slate-800/50' 
+                        : 'text-slate-300 hover:text-white'
+                    }`}
                   >
                     {item.name}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -77,16 +79,19 @@ export const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpe
           isMenuOpen ? 'translate-y-0' : 'translate-y-full'
         }`}>
           {menuItems.map((item, index) => (
-            <button
+            <Link
               key={item.name}
-              onClick={() => scrollToSection(item.href)}
-              className={`text-2xl text-slate-300 hover:text-white transition-all duration-300 ${
-                isMenuOpen ? 'animate-fade-in' : ''
-              }`}
+              to={item.href}
+              onClick={handleMenuClick}
+              className={`text-2xl transition-all duration-300 ${
+                location.pathname === item.href 
+                  ? 'text-blue-400' 
+                  : 'text-slate-300 hover:text-white'
+              } ${isMenuOpen ? 'animate-fade-in' : ''}`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {item.name}
-            </button>
+            </Link>
           ))}
         </div>
       </div>

@@ -2,7 +2,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Camera, Microchip, Building, Leaf } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Camera, Microchip, Building, Leaf, Coffee, ExternalLink } from 'lucide-react';
 
 const businessSectors = [
   {
@@ -13,7 +14,12 @@ const businessSectors = [
     highlight: 'Entertainment & News Platforms',
     stat: '2 Active Platforms',
     gradient: 'from-purple-500 to-pink-500',
-    achievements: 'Widely popular events and innovative digital campaigns that have reshaped audience engagement'
+    achievements: 'Widely popular events and innovative digital campaigns that have reshaped audience engagement',
+    links: [
+      { name: 'ShakaraSquare.ng', url: 'https://shakarasquare.ng/' },
+      { name: 'ShakaraSquare TV', url: 'https://www.instagram.com/shakarasquaretv1?igsh=MWR0ZXFkbGdvaTU5&utm_source=qr' },
+      { name: 'SearchlightNews.ng', url: 'https://searchlightnews.ng/' }
+    ]
   },
   {
     icon: Microchip,
@@ -23,7 +29,11 @@ const businessSectors = [
     highlight: 'Computers, Software & Smart Devices',
     stat: 'Multiple Solutions',
     gradient: 'from-blue-500 to-cyan-500',
-    achievements: 'Proprietary software platforms, cybersecurity tools, and smart device solutions'
+    achievements: 'Proprietary software platforms, cybersecurity tools, and smart device solutions',
+    links: [
+      { name: 'Facebook Page', url: 'https://www.facebook.com/share/18i6gKUShq/?mibextid=wwXIfr' },
+      { name: 'Boomdim Shop', url: 'https://www.instagram.com/boomdim_shoponline?igsh=dDVtMHp2MndvenVx&utm_source=qr' }
+    ]
   },
   {
     icon: Building,
@@ -33,7 +43,8 @@ const businessSectors = [
     highlight: 'Sustainable Luxury Living',
     stat: 'Prime Locations',
     gradient: 'from-green-500 to-emerald-500',
-    achievements: 'Green buildings, smart infrastructure, and eco-friendly construction practices'
+    achievements: 'Green buildings, smart infrastructure, and eco-friendly construction practices',
+    links: []
   },
   {
     icon: Leaf,
@@ -43,7 +54,23 @@ const businessSectors = [
     highlight: 'Food Security & Export Excellence',
     stat: 'Full Value Chain',
     gradient: 'from-amber-500 to-orange-500',
-    achievements: 'Empowering local farmers and ensuring food security through export of agricultural produce'
+    achievements: 'Empowering local farmers and ensuring food security through export of agricultural produce',
+    links: [
+      { name: 'SkyFish Farm', url: 'https://www.instagram.com/skyfishfarm?igsh=c2xobXhndm80MTh4&utm_source=qr' }
+    ]
+  },
+  {
+    icon: Coffee,
+    title: 'Hospitality Sector',
+    subsidiaries: ['Old Berrys Restaurant and Bar', 'Coastal View Shortlets'],
+    services: ['Fine dining', 'Vibrant nightlife', 'Short-term accommodations', 'Extended stays'],
+    highlight: 'Comfort & Elegance Redefined',
+    stat: 'Premium Experience',
+    gradient: 'from-rose-500 to-pink-500',
+    achievements: 'The hospitality arm of Fadassols Group is redefining comfort and elegance, spearheaded by Old Berrys Restaurant and Bar, a hub for fine dining and vibrant nightlife. Also Coastal View Shortlets in Lekki, Eti Osa area of Lagos offering stylish and serene accommodations for both short and extended stays. Together, they reflect Fadassols Group\'s commitment to excellence in hospitality and guest satisfaction.',
+    links: [
+      { name: 'Old Berrys Bar', url: 'https://www.instagram.com/oldberrysbar?igsh=YXZmM3VjdTlwYWxy&utm_source=qr' }
+    ]
   }
 ];
 
@@ -165,6 +192,27 @@ export const BusinessSectorsSection: React.FC = () => {
                     <h4 className="text-sm font-semibold text-green-400 mb-2">Key Achievements</h4>
                     <p className="text-xs text-slate-400 leading-relaxed">{sector.achievements}</p>
                   </div>
+
+                  {/* External Links */}
+                  {sector.links && sector.links.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold text-cyan-400 mb-2">Visit Our Platforms</h4>
+                      <div className="space-y-2">
+                        {sector.links.map((link, linkIndex) => (
+                          <Button
+                            key={linkIndex}
+                            variant="outline"
+                            size="sm"
+                            className="w-full justify-between bg-slate-700/30 border-slate-600 text-slate-300 hover:bg-slate-600/50 hover:text-white"
+                            onClick={() => window.open(link.url, '_blank')}
+                          >
+                            <span className="text-xs">{link.name}</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Animated Stat */}
                   <div className="text-center pt-4 border-t border-slate-700">
