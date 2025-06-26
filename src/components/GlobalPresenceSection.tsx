@@ -21,7 +21,11 @@ const locations = [
   }
 ];
 
-export const GlobalPresenceSection: React.FC = () => {
+interface GlobalPresenceSectionProps {
+  showHeader?: boolean;
+}
+
+export const GlobalPresenceSection: React.FC<GlobalPresenceSectionProps> = ({ showHeader = true }) => {
   const [isVisible, setIsVisible] = useState(true); // Always visible
   const ref = useRef<HTMLDivElement>(null);
 
@@ -46,27 +50,29 @@ export const GlobalPresenceSection: React.FC = () => {
   return (
     <section id="global" className="py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-7xl mx-auto" ref={ref}>
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge 
-            variant="outline" 
-            className="border-blue-500/30 text-blue-300 bg-blue-500/10 px-4 py-2 text-sm backdrop-blur-sm mb-6"
-          >
-            Global Reach
-          </Badge>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-8 transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
-            <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
-              Operating Globally, Impacting Locally
-            </span>
-          </h2>
-          <p className={`text-xl text-slate-400 max-w-3xl mx-auto transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`} style={{ animationDelay: '200ms' }}>
-            Building bridges across continents through strategic partnerships and collaborative innovation
-          </p>
-        </div>
+        {/* Section Header - Only show if showHeader is true */}
+        {showHeader && (
+          <div className="text-center mb-16">
+            <Badge 
+              variant="outline" 
+              className="border-blue-500/30 text-blue-300 bg-blue-500/10 px-4 py-2 text-sm backdrop-blur-sm mb-6"
+            >
+              Global Reach
+            </Badge>
+            <h2 className={`text-4xl md:text-5xl font-bold mb-8 transition-all duration-800 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}>
+              <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
+                Operating Globally, Impacting Locally
+              </span>
+            </h2>
+            <p className={`text-xl text-slate-400 max-w-3xl mx-auto transition-all duration-800 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`} style={{ animationDelay: '200ms' }}>
+              Building bridges across continents through strategic partnerships and collaborative innovation
+            </p>
+          </div>
+        )}
 
         {/* Location Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">

@@ -27,7 +27,11 @@ const coreValues = [
   }
 ];
 
-export const AboutSection: React.FC = () => {
+interface AboutSectionProps {
+  showHeader?: boolean;
+}
+
+export const AboutSection: React.FC<AboutSectionProps> = ({ showHeader = true }) => {
   const [isVisible, setIsVisible] = useState(true); // Always visible
   const ref = useRef<HTMLDivElement>(null);
 
@@ -52,22 +56,24 @@ export const AboutSection: React.FC = () => {
   return (
     <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-7xl mx-auto" ref={ref}>
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge 
-            variant="outline" 
-            className="border-blue-500/30 text-blue-300 bg-blue-500/10 px-4 py-2 text-sm backdrop-blur-sm mb-6"
-          >
-            Our Foundation
-          </Badge>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-8 transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
-            <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
-              About Fadassols Group
-            </span>
-          </h2>
-        </div>
+        {/* Section Header - Only show if showHeader is true */}
+        {showHeader && (
+          <div className="text-center mb-16">
+            <Badge 
+              variant="outline" 
+              className="border-blue-500/30 text-blue-300 bg-blue-500/10 px-4 py-2 text-sm backdrop-blur-sm mb-6"
+            >
+              Our Foundation
+            </Badge>
+            <h2 className={`text-4xl md:text-5xl font-bold mb-8 transition-all duration-800 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}>
+              <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
+                About Fadassols Group
+              </span>
+            </h2>
+          </div>
+        )}
 
         {/* Vision & Mission */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">

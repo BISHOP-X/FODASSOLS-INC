@@ -74,7 +74,11 @@ const businessSectors = [
   }
 ];
 
-export const BusinessSectorsSection: React.FC = () => {
+interface BusinessSectionProps {
+  showHeader?: boolean;
+}
+
+export const BusinessSectorsSection: React.FC<BusinessSectionProps> = ({ showHeader = true }) => {
   const [isVisible, setIsVisible] = useState(true); // Always visible
   const [animatedStats, setAnimatedStats] = useState(businessSectors.map(() => true)); // All stats visible
   const ref = useRef<HTMLDivElement>(null);
@@ -110,27 +114,29 @@ export const BusinessSectorsSection: React.FC = () => {
   return (
     <section id="sectors" className="py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-7xl mx-auto" ref={ref}>
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge 
-            variant="outline" 
-            className="border-blue-500/30 text-blue-300 bg-blue-500/10 px-4 py-2 text-sm backdrop-blur-sm mb-6"
-          >
-            Our Expertise
-          </Badge>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-8 transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
-            <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
-              Business Sectors
-            </span>
-          </h2>
-          <p className={`text-xl text-slate-400 max-w-3xl mx-auto transition-all duration-800 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`} style={{ animationDelay: '200ms' }}>
-            Driving innovation across diverse industries with strategic focus and operational excellence
-          </p>
-        </div>
+        {/* Section Header - Only show if showHeader is true */}
+        {showHeader && (
+          <div className="text-center mb-16">
+            <Badge 
+              variant="outline" 
+              className="border-blue-500/30 text-blue-300 bg-blue-500/10 px-4 py-2 text-sm backdrop-blur-sm mb-6"
+            >
+              Our Expertise
+            </Badge>
+            <h2 className={`text-4xl md:text-5xl font-bold mb-8 transition-all duration-800 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}>
+              <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">
+                Business Sectors
+              </span>
+            </h2>
+            <p className={`text-xl text-slate-400 max-w-3xl mx-auto transition-all duration-800 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`} style={{ animationDelay: '200ms' }}>
+              Driving innovation across diverse industries with strategic focus and operational excellence
+            </p>
+          </div>
+        )}
 
         {/* Sectors Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

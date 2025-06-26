@@ -32,10 +32,8 @@ const AboutPage: React.FC = () => {
             Discover our journey, values, and the exceptional leadership driving our success across multiple industries.
           </p>
         </div>
-      </section>
-      
-      {/* About Content */}
-      <AboutSection />
+      </section>        {/* About Content */}
+      <AboutSection showHeader={false} />
       
       {/* Leadership */}
       <LeadershipSection />

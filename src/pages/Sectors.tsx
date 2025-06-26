@@ -32,9 +32,8 @@ const SectorsPage: React.FC = () => {
           </p>
         </div>
       </section>
-      
-      {/* Sectors Content */}
-      <BusinessSectorsSection />
+        {/* Sectors Content */}
+      <BusinessSectorsSection showHeader={false} />
       
       <Footer />
     </div>
