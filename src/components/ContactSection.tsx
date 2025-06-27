@@ -163,7 +163,14 @@ Date: ${new Date().toLocaleString()}
           {/* Contact Form */}
           <Card className="bg-slate-800/30 backdrop-blur-sm border-slate-700/50">
             <CardContent className="p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">Send us a message</h3>
+              <div className="flex items-center space-x-3 mb-6">
+                <img 
+                  src="/logo.jpg" 
+                  alt="Fadassols Group Logo" 
+                  className="w-8 h-8 object-contain"
+                />
+                <h3 className="text-2xl font-bold text-white">Send us a message</h3>
+              </div>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

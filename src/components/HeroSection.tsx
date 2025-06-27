@@ -39,6 +39,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ scrollY }) => {
           </Badge>
         </div>
 
+        {/* Logo */}
+        <div className="mb-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
+          <img 
+            src="/logo.jpg" 
+            alt="Fadassols Group Logo" 
+            className="w-16 h-16 md:w-20 md:h-20 object-contain mx-auto opacity-90"
+          />
+        </div>
+
         {/* Main Heading */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-fade-in" style={{ animationDelay: '200ms' }}>
           <span className="bg-gradient-to-r from-white via-blue-100 to-blue-200 bg-clip-text text-transparent">

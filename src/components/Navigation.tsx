@@ -32,8 +32,15 @@ export const Navigation: React.FC<NavigationProps> = ({ isMenuOpen, setIsMenuOpe
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-amber-400 to-amber-300 bg-clip-text text-transparent">
-                Fadassols
+              <Link to="/" className="flex items-center space-x-2">
+                <img 
+                  src="/logo.jpg" 
+                  alt="Fadassols Group Logo" 
+                  className="w-8 h-8 object-contain"
+                />
+                <span className="text-xl font-bold bg-gradient-to-r from-blue-400 via-amber-400 to-amber-300 bg-clip-text text-transparent">
+                  Fadassols
+                </span>
               </Link>
             </div>
 

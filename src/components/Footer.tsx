@@ -51,8 +51,15 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent mb-4">
-              Fadassols Group
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src="/logo.jpg" 
+                alt="Fadassols Group Logo" 
+                className="w-10 h-10 object-contain"
+              />
+              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent">
+                Fadassols Group
+              </div>
             </div>
             <p className="text-slate-400 text-sm mb-4">
               Redefining industries through innovation, technology, and sustainable practices across multiple sectors.

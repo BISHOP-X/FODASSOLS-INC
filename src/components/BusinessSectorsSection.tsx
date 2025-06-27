@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Camera, Microchip, Building, Leaf, Coffee, ExternalLink } from 'lucide-react';
+import { Camera, Microchip, Building, Leaf, Coffee, Heart, ExternalLink } from 'lucide-react';
 
 const businessSectors = [
   {
@@ -18,6 +18,7 @@ const businessSectors = [
     links: [
       { name: 'ShakaraSquare.ng', url: 'https://shakarasquare.ng/' },
       { name: 'ShakaraSquare TV', url: 'https://www.instagram.com/shakarasquaretv1?igsh=MWR0ZXFkbGdvaTU5&utm_source=qr' },
+      { name: 'Shakara Square Entertainment', url: 'https://www.facebook.com/share/1C7DyAH5RU/?mibextid=wwXIfr' },
       { name: 'SearchlightNews.ng', url: 'https://searchlightnews.ng/' }
     ]
   },
@@ -70,6 +71,19 @@ const businessSectors = [
     achievements: 'The hospitality arm of Fadassols Group is redefining comfort and elegance, spearheaded by Old Berrys Restaurant and Bar, a hub for fine dining and vibrant nightlife. Also Coastal View Shortlets in Lekki, Eti Osa area of Lagos offering stylish and serene accommodations for both short and extended stays. Together, they reflect Fadassols Group\'s commitment to excellence in hospitality and guest satisfaction.',
     links: [
       { name: 'Old Berrys Bar', url: 'https://www.instagram.com/oldberrysbar?igsh=YXZmM3VjdTlwYWxy&utm_source=qr' }
+    ]
+  },
+  {
+    icon: Heart,
+    title: 'Obinna Ude Foundation',
+    subsidiaries: ['Youth Empowerment Programs', 'Skills Training Centers'],
+    services: ['Entrepreneurship mentorship', 'Skills training', 'Community engagement', 'Leadership development'],
+    highlight: 'Empowering Future Leaders',
+    stat: 'Next Generation Focus',
+    gradient: 'from-indigo-500 to-purple-500',
+    achievements: 'The Obinna Ude Foundation is passionately committed to nurturing and empowering the next generation of entrepreneurs, skilled craftsmen, and visionary leaders. Through innovative programs, mentorship, skills training, and community engagement, the Foundation provides young people with the tools, opportunities, and support they need to realize their full potential, drive economic growth, and become agents of positive change in their communities and beyond.',
+    links: [
+      { name: 'Foundation Facebook Page', url: 'https://www.facebook.com/share/1EhCPMPkoR/?mibextid=wwXIfr' }
     ]
   }
 ];
