@@ -8,7 +8,7 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { number: 4, label: 'Business Sectors' },
+  { number: 6, label: 'Business Sectors' },
   { number: 2, label: 'Countries' },
   { number: 15, label: 'Subsidiaries', suffix: '+' },
 ];

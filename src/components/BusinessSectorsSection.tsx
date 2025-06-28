@@ -12,7 +12,7 @@ const businessSectors = [
     subsidiaries: ['ShakaraSquare.ng', 'SearchlightNews.ng'],
     services: ['Event production', 'Digital media', 'Advertising', 'News distribution'],
     highlight: 'Entertainment & News Platforms',
-    stat: '2 Active Platforms',
+    stat: 'All Active Platforms',
     gradient: 'from-purple-500 to-pink-500',
     achievements: 'Widely popular events and innovative digital campaigns that have reshaped audience engagement',
     links: [
